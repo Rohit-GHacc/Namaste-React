@@ -42,6 +42,15 @@
     gap: 5px;
     justify-content: space-evenly;
 }
+.shimmer-card-container{
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: space-evenly;
+}
 .res-card{
     width: 270px;
     /* height: 300px; */
@@ -49,6 +58,20 @@
     padding: 5px;
     border-radius: 15px;
     cursor: pointer;
+}
+.shimmer-card{
+    width: 270px;
+    height: 500px;
+    background-color:rgb(233, 233, 233);
+    padding: 5px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.shimmer-card>.dark-bg{
+    background-color: gray;
+    height: 50%;
+    width: 100%;
+    border-radius: 15px;
 }
 
 .res-card:hover{
