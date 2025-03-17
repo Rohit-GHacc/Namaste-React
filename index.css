@@ -14,8 +14,18 @@
     display: flex;
     list-style-type: none;
 }
-.nav > ul > li{
+.nav > ul > a{
     margin: 0px 10px;
+    color: black;
+    text-decoration: none;
+    /* transition: color ease-in 1s; */
+}
+.nav > ul> a:hover{
+    color: gray;
+    transition: color ease-in 10ms;
+    position:static;
+    font-size: 25px;
+    transition: font-size ease-in 10ms;
 }
 /* .search{ */
     /* padding: 4px 10px;
@@ -45,6 +55,11 @@
     flex-wrap: wrap;
     gap: 5px;
     justify-content: space-evenly;
+
+}
+.res-card-container>a{
+    text-decoration:none;
+    color: black;
 }
 .shimmer-card-container{
     margin: 5px;

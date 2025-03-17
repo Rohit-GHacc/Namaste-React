@@ -5,12 +5,13 @@ import Body from './components/Body';
 import Footer from './components/Footer';
 import About from './components/About'
 import Error from './components/Error'
-import { createBrowserRouter, BrowserRouter, Routes, Route,RouterProvider } from 'react-router-dom'
-
+import Contact from './components/Contact'
+import { createBrowserRouter, BrowserRouter, Routes, Route,RouterProvider, Outlet } from 'react-router-dom'
+import Restaurant from './components/Restaurant'
 const AppLayout = () => (
     <div className='layout'>
         <Header />
-        <Body />
+        <Outlet />
         <Footer />
     </div>
 )
@@ -18,10 +19,25 @@ const router = createBrowserRouter([
     {
         path:'/',
         element: <AppLayout/>,
-        errorElement: <Error/>
-    },{
-        path:'/about',
-        element: <About/>
+        errorElement: <Error/>,
+        children:[
+            {
+                index: true,
+                element: <Body/>
+            },
+            {
+                path:'about',
+                element: <About/>
+            },
+            {
+                path: 'contact',
+                element: <Contact/>
+            },
+            {
+                path: 'restaurants/:id',
+                element: <Restaurant/>
+            }
+        ],
     }
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'))

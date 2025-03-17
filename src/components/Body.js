@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
+import {SWIGGY_API} from '../utils/constant'
+import {Link} from 'react-router-dom'
 import Shimmer from './Shimmer'
 const Body = () => {
     const [filteredList, setFilteredList] = useState([]);
@@ -8,10 +10,12 @@ const Body = () => {
     const [loading, setLoading] = useState(true)
     useEffect(() => {
         fetchData();
-    }, [])
+    },[]) // it is ran only on the first render of this Body component                     
 
     const fetchData = async () => {
-        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.99308229999999&lng=77.0150735&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+        // console.log(`${SWIGGY_API}`)
+        const data = await fetch(""+SWIGGY_API)
+        console.log("data : " + data)
         const json = await data.json();
         console.log(json);
         setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
@@ -20,6 +24,7 @@ const Body = () => {
     }
     const showTopRated = () => {
         setFilteredList(listOfRestaurants.filter((restaurant) => restaurant.info.avgRating > 4.3));
+        // console.log(filteredList)
         if(filteredList.length===0){
             return <div>
                 No Restaurants present to display.
@@ -31,7 +36,7 @@ const Body = () => {
         setFilteredList(listOfRestaurants)
     }
 
-    console.log(filteredList.length)
+    // console.log(filteredList.length)
 
     // Conditional Rendering : 
     return loading ?  <Shimmer/> : (
@@ -49,6 +54,7 @@ const Body = () => {
                         setFilteredList(
                             listOfRestaurants.filter((rest)=>rest.info.name.toLowerCase().includes(searchRest.toLowerCase()))
                         )
+                        // console.log(filteredList)
                         if(filteredList.length === 0){
                             return <div>No restaurants to display.</div>
                         }
@@ -60,8 +66,8 @@ const Body = () => {
             </div>
             <div className='res-card-container'>
                 {
-                    filteredList.length===0 ? <div className ='no-rest-message'>No restaurants to display</div> : filteredList.map((restaurant) => (
-                        <RestaurantCard key={restaurant?.info?.id} resData={restaurant?.info} />
+                    filteredList.length === 0 ? <div className ='no-rest-message'>No restaurants to display</div> : filteredList.map((restaurant) => (
+                        <Link to={`/restaurants/${restaurant?.info?.id}`} key = {restaurant?.info?.id} ><RestaurantCard resData={restaurant?.info} /></Link>
                     ))
                 }
             </div>
