@@ -10,17 +10,19 @@ const Restaurant = ()=>{
     },[])
     const fetchMenu =  async()=>{
         // console.log("abdcd")
-        const data = await fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.99308229999999&lng=77.0150735&restaurantId=${id}&catalog_qa=undefined`);
-        const json = await data.json();
-        console.log(json);
+        const data = await fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.9840222&lng=77.0233415&restaurantId=${id}&catalog_qa=undefined&submitAction=ENTER `);
+        console.log("data : "+ data)
+        const json = data.json();
+        console.log("JSON : " + json);
         setResInfo(json);
-        const itemList = json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[4]?.card?.card?.itemCards;
+        const itemList = json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards;
         console.log(itemList);
         setItems(itemList);
+        
     }
     if(resInfo===null) return <Shimmer/>
+    console.log("resInfo : ", resInfo);
     const {name,areaName}  = resInfo?.data?.cards[2]?.card?.card?.info;
-
     return (
         <div>
             <h1>{name}</h1>
