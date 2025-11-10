@@ -5,7 +5,11 @@ import Footer from './components/Footer';
 import About from './components/About'
 import Error from './components/Error'
 import Contact from './components/Contact'
+<<<<<<< HEAD
 import { createBrowserRouter, BrowserRouter, Routes, Route,RouterProvider, Outlet } from 'react-router-dom'
+=======
+import { createBrowserRouter, BrowserRouter, Routes, Route, RouterProvider, Outlet } from 'react-router-dom'
+>>>>>>> 9f3eb76 (first commit on mac)
 import Restaurant from './components/Restaurant'
 const AppLayout = () => (
     <div className='layout'>

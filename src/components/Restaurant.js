@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom';
 import Shimmer from './Shimmer';
@@ -22,6 +23,19 @@ const Restaurant = ()=>{
     }
     if(resInfo===null) return <Shimmer/>
     console.log("resInfo : ", resInfo);
+=======
+import { useParams } from 'react-router-dom';
+import useRestaurantMenu from '../utils/useRestaurantMenu';
+import Shimmer from './Shimmer';
+
+
+const Restaurant = ()=>{
+    const {id} = useParams();
+    const resInfo = useRestaurantMenu(id);
+    if(resInfo===null) return <Shimmer/>
+    console.log("resInfo : ", resInfo);
+    const items = json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards;
+>>>>>>> 9f3eb76 (first commit on mac)
     const {name,areaName}  = resInfo?.data?.cards[2]?.card?.card?.info;
     return (
         <div>
