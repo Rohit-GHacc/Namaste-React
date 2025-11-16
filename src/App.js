@@ -1,15 +1,11 @@
+import {lazy, Suspense} from 'react'
 import ReactDOM from 'react-dom/client'
 import Header from './components/Header'
 import Body from './components/Body';
 import Footer from './components/Footer';
-import About from './components/About'
 import Error from './components/Error'
-import Contact from './components/Contact'
-<<<<<<< HEAD
-import { createBrowserRouter, BrowserRouter, Routes, Route,RouterProvider, Outlet } from 'react-router-dom'
-=======
 import { createBrowserRouter, BrowserRouter, Routes, Route, RouterProvider, Outlet } from 'react-router-dom'
->>>>>>> 9f3eb76 (first commit on mac)
+
 import Restaurant from './components/Restaurant'
 const AppLayout = () => (
     <div className='layout'>
@@ -18,6 +14,8 @@ const AppLayout = () => (
         <Footer />
     </div>
 )
+const About = lazy(()=> import('./components/About'));
+const Contact = lazy(()=>import('./components/Contact'))
 const router = createBrowserRouter([
     {
         path:'/',
@@ -30,7 +28,7 @@ const router = createBrowserRouter([
             },
             {
                 path:'about',
-                element: <About/>
+                element: <Suspense fallback = {<h1>Loading...</h1>}><About/></Suspense>
             },
             {
                 path: 'contact',
