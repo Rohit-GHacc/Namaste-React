@@ -9,4 +9,15 @@ const RestaurantCard = (props)=>{
         <h4>{resData.sla.deliveryTime} minutes</h4>
     </div>
 }
+
+export const RestaurantCardOpen = (RestaurantCard)=>{
+    return (props)=>{
+        return(
+            <div>
+                <label className = 'absolute text-white bg-green-500 p-2 m-3 rounded-xl'> Open </label>
+                <RestaurantCard {...props}/>
+            </div>
+        )
+    }
+}
 export default RestaurantCard;

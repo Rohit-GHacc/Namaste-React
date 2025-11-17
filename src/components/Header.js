@@ -4,7 +4,7 @@ import useOnlineStatus from '../utils/useOnlineStatus'
 const Header = ()=>{
     const isOnline = useOnlineStatus();
     return (
-    <div className = 'flex justify-between shadow-lg bg-pink-100'>
+    <div className = 'flex justify-between shadow-lg bg-green-100'>
         <img src= {LOGO_URL} className = 'w-50'/>
         <ul className = 'flex items-center text-2xl space-x-8 px-6'>
             <li>Online: {isOnline ? '🟢' : '🔴'}</li>

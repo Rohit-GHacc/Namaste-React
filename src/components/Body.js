@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {RestaurantCardOpen} from "./RestaurantCard";
 import {SWIGGY_API} from '../utils/constant'
 import {Link} from 'react-router-dom'
 import Shimmer from './Shimmer'
@@ -8,6 +8,7 @@ const Body = () => {
     const [searchRest, setSearchRest] = useState("");
     const [listOfRestaurants, setListOfRestaurants] = useState([])
     const [loading, setLoading] = useState(true)
+    const RestaurantCardOpenComp = RestaurantCardOpen(RestaurantCard);
     useEffect(() => {
         fetchData();
     },[]) // it is ran only on the first render of this Body component                     
@@ -24,7 +25,7 @@ const Body = () => {
     }
     const showTopRated = () => {
         setFilteredList(listOfRestaurants.filter((restaurant) => restaurant.info.avgRating > 4.3));
-        // console.log(filteredList)
+        console.log(filteredList)
         if(filteredList.length===0){
             return <div>
                 No Restaurants present to display.
@@ -68,7 +69,7 @@ const Body = () => {
             <div className='flex flex-wrap m-2 justify-between space-y-2'>
                 {
                     filteredList.length === 0 ? <div className ='font-bold text-center text-2xl'>No restaurants to display</div> : filteredList.map((restaurant) => (
-                        <Link className = 'hover:bg-gray-200 rounded-lg' to={`/restaurants/${restaurant?.info?.id}`} key = {restaurant?.info?.id} ><RestaurantCard resData={restaurant?.info} /></Link>
+                        <Link className = 'hover:bg-gray-200 rounded-lg' to={`/restaurants/${restaurant?.info?.id}`} key = {restaurant?.info?.id} >{restaurant?.info?.isOpen ? <RestaurantCardOpenComp resData = {restaurant?.info}/>: <RestaurantCard resData={restaurant?.info} />}</Link>
                     ))
                 }
             </div>
