@@ -40,16 +40,17 @@ const Body = () => {
 
     // Conditional Rendering : 
     return loading ?  <Shimmer/> : (
-        <div>
-            <div className="filter">
-                <div>
+        <div > 
+            <div className="flex justify-between space-x-4 m-4">
+                <div className = 'flex space-x-2 '>
                     <input 
+                    className = 'border border-gray-400 p-2 rounded-2xl'
                     type = 'text' 
                     value = {searchRest} 
                     onChange={(e)=>{setSearchRest(e.target.value)}}>  
                     </input>
                     <button 
-                    className = 'search-btn'
+                    className = 'border border-black px-2 rounded-2xl bg-green-100 hover:bg-green-300 cursor-pointer'
                     onClick={()=>{
                         setFilteredList(
                             listOfRestaurants.filter((rest)=>rest.info.name.toLowerCase().includes(searchRest.toLowerCase()))
@@ -61,13 +62,13 @@ const Body = () => {
                     }}
                     > Search</button>
                 </div>
-                <button className='search-btn' onClick={showTopRated}> Top Rated Restaurants</button>
-                <button className='search-btn' onClick={showAll}> Show All Restaurants</button>
+                <button className='border border-black px-2 rounded-2xl bg-green-100 hover:bg-green-300 cursor-pointer' onClick={showTopRated}> Top Rated Restaurants</button>
+                <button className='border border-black px-2 rounded-2xl bg-green-100 hover:bg-green-300 cursor-pointer' onClick={showAll}> Show All Restaurants</button>
             </div>
-            <div className='res-card-container'>
+            <div className='flex flex-wrap m-2 justify-between space-y-2'>
                 {
-                    filteredList.length === 0 ? <div className ='no-rest-message'>No restaurants to display</div> : filteredList.map((restaurant) => (
-                        <Link to={`/restaurants/${restaurant?.info?.id}`} key = {restaurant?.info?.id} ><RestaurantCard resData={restaurant?.info} /></Link>
+                    filteredList.length === 0 ? <div className ='font-bold text-center text-2xl'>No restaurants to display</div> : filteredList.map((restaurant) => (
+                        <Link className = 'hover:bg-gray-200 rounded-lg' to={`/restaurants/${restaurant?.info?.id}`} key = {restaurant?.info?.id} ><RestaurantCard resData={restaurant?.info} /></Link>
                     ))
                 }
             </div>
