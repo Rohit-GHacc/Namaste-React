@@ -77,7 +77,7 @@ const Body = () => {
             <div className='flex flex-wrap m-2 justify-between space-y-2'>
                 {
                     filteredList.length === 0 ? <div className ='font-bold text-center text-2xl'>No restaurants to display</div> : filteredList.map((restaurant) => (
-                        <Link className = 'hover:bg-gray-200 rounded-lg' to={`/restaurants/${restaurant?.info?.id}`} key = {restaurant?.info?.id} >{restaurant?.info?.isOpen ? <RestaurantCardOpenComp resData = {restaurant?.info}/>: <RestaurantCard resData={restaurant?.info} />}</Link>
+                        <div className = 'hover:bg-gray-200 cursor-pointer rounded-lg' key = {restaurant?.info?.id} >{restaurant?.info?.isOpen ? <RestaurantCardOpenComp resData = {restaurant?.info}/>: <RestaurantCard resData={restaurant?.info} />}</div>
                     ))
                 }
             </div>

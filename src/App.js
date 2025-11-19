@@ -7,12 +7,15 @@ import Error from './components/Error'
 import { createBrowserRouter, BrowserRouter, Routes, Route, RouterProvider, Outlet } from 'react-router-dom'
 import UserContext from './utils/UserContext'
 import {useState} from 'react'
-
+import Cart from './components/Cart'
 import Restaurant from './components/Restaurant'
 import UserContext from './utils/UserContext';
+import {Provider} from 'react-redux'
+import appStore from './utils/appStore'
 const AppLayout = () => {
     const [userName, setUserName] = useState("Rohit Chugh")
     return (
+        <Provider store={appStore}>
         <UserContext.Provider value ={{loggedInUser: userName, setUserName: setUserName}}>
             <div className='layout'>
                 <Header />
@@ -20,6 +23,7 @@ const AppLayout = () => {
                 <Footer />
             </div>
         </UserContext.Provider>
+        </Provider>
     )
 }
 const About = lazy(()=> import('./components/About'));
@@ -42,9 +46,13 @@ const router = createBrowserRouter([
                 path: 'contact',
                 element: <Contact/>
             },
+            // {
+            //     path: 'restaurants/:id',
+            //     element: <Restaurant/>
+            // },
             {
-                path: 'restaurants/:id',
-                element: <Restaurant/>
+                path: '/cart',
+                element: <Cart/>
             }
         ],
     }

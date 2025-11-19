@@ -1,12 +1,24 @@
+import { useDispatch } from "react-redux";
 import { imageUrl } from "../utils/constant";
+import {useState, useEffect} from 'react'
+import { addItem } from "../utils/cartSlice";
 const RestaurantCard = (props)=>{
     const {resData} = props;
-    return <div className = 'w-[200px] m-2 p-2 rounded-lg '>
+    const [colorValue, setColorValue] = useState(500);
+    const handleMouseOver = ()=>{
+        setColorValue(900);
+    }
+    useEffect(()=>{
+        setColorValue(500);
+    },[])
+    const dispatch = useDispatch();
+    return <div className = 'w-[200px] m-2 p-2 rounded-lg ' onMouseOver ={handleMouseOver} onMouseLeave= {()=>setColorValue(500)} onClick = {()=>dispatch(addItem(resData))}>
         <img className = 'rounded-lg' src={imageUrl + resData.cloudinaryImageId}></img>
         <h3 className = 'font-bold text-lg py-2'>{resData?.name}</h3>
         <h4> {resData.cuisines.join(', ')}</h4>
         <h4>{resData.avgRating} stars</h4>
         <h4>{resData.sla.deliveryTime} minutes</h4>
+        <button className = {`bg-green-${colorValue} p-4 m-2 text-white rounded-2xl cursor-pointer`}> Add to Cart </button>
     </div>
 }
 
