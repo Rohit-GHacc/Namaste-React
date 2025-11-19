@@ -5,15 +5,23 @@ import Body from './components/Body';
 import Footer from './components/Footer';
 import Error from './components/Error'
 import { createBrowserRouter, BrowserRouter, Routes, Route, RouterProvider, Outlet } from 'react-router-dom'
+import UserContext from './utils/UserContext'
+import {useState} from 'react'
 
 import Restaurant from './components/Restaurant'
-const AppLayout = () => (
-    <div className='layout'>
-        <Header />
-        <Outlet />
-        <Footer />
-    </div>
-)
+import UserContext from './utils/UserContext';
+const AppLayout = () => {
+    const [userName, setUserName] = useState("Rohit Chugh")
+    return (
+        <UserContext.Provider value ={{loggedInUser: userName, setUserName: setUserName}}>
+            <div className='layout'>
+                <Header />
+                <Outlet />
+                <Footer />
+            </div>
+        </UserContext.Provider>
+    )
+}
 const About = lazy(()=> import('./components/About'));
 const Contact = lazy(()=>import('./components/Contact'))
 const router = createBrowserRouter([

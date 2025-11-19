@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import RestaurantCard, {RestaurantCardOpen} from "./RestaurantCard";
 import {SWIGGY_API} from '../utils/constant'
 import {Link} from 'react-router-dom'
 import Shimmer from './Shimmer'
+import UserContext from '../utils/UserContext';
 const Body = () => {
     const [filteredList, setFilteredList] = useState([]);
     const [searchRest, setSearchRest] = useState("");
@@ -38,7 +39,7 @@ const Body = () => {
     }
 
     // console.log(filteredList.length)
-
+    const {loggedInUser, setUserName} = useContext(UserContext)
     // Conditional Rendering : 
     return loading ?  <Shimmer/> : (
         <div > 
@@ -58,11 +59,18 @@ const Body = () => {
                         )
                         // console.log(filteredList)
                         if(filteredList.length === 0){
-                            return <div>No restaurants to display.</div>
+                            return <div> No restaurants to display.</div>
                         }
                     }}
                     > Search</button>
                 </div>
+                <input 
+                type = 'text' 
+                className = 'border-1 w-1/6 px-3 border-gray-500 rounded-2xl' 
+                placeholder='type username'
+                value = {loggedInUser}
+                onChange = {(e)=>{setUserName(e.target.value)}}>
+                </input>
                 <button className='border border-black px-2 rounded-2xl bg-green-100 hover:bg-green-300 cursor-pointer' onClick={showTopRated}> Top Rated Restaurants</button>
                 <button className='border border-black px-2 rounded-2xl bg-green-100 hover:bg-green-300 cursor-pointer' onClick={showAll}> Show All Restaurants</button>
             </div>
