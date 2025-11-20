@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { imageUrl } from "../utils/constant";
 import {useState, useEffect} from 'react'
 import { addItem } from "../utils/cartSlice";
+import React from 'react'
 const RestaurantCard = (props)=>{
     const {resData} = props;
     const [colorValue, setColorValue] = useState(500);
@@ -11,6 +12,7 @@ const RestaurantCard = (props)=>{
     useEffect(()=>{
         setColorValue(500);
     },[])
+    console.log(resData);
     const dispatch = useDispatch();
     return <div className = 'w-[200px] m-2 p-2 rounded-lg ' onMouseOver ={handleMouseOver} onMouseLeave= {()=>setColorValue(500)} onClick = {()=>dispatch(addItem(resData))}>
         <img className = 'rounded-lg' src={imageUrl + resData.cloudinaryImageId}></img>
@@ -22,7 +24,7 @@ const RestaurantCard = (props)=>{
     </div>
 }
 
-export const RestaurantCardOpen = (RestaurantCard)=>{
+export const withOpenLabel = (RestaurantCard)=>{
     return (props)=>{
         return(
             <div>

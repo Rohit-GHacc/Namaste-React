@@ -1,7 +1,6 @@
 import { useEffect, useState, useContext } from "react";
-import RestaurantCard, {RestaurantCardOpen} from "./RestaurantCard";
+import RestaurantCard, {withOpenLabel} from "./RestaurantCard";
 import {SWIGGY_API} from '../utils/constant'
-import {Link} from 'react-router-dom'
 import Shimmer from './Shimmer'
 import UserContext from '../utils/UserContext';
 const Body = () => {
@@ -9,7 +8,7 @@ const Body = () => {
     const [searchRest, setSearchRest] = useState("");
     const [listOfRestaurants, setListOfRestaurants] = useState([])
     const [loading, setLoading] = useState(true)
-    const RestaurantCardOpenComp = RestaurantCardOpen(RestaurantCard);
+    const RestaurantCardOpenComp = withOpenLabel(RestaurantCard);
     useEffect(() => {
         fetchData();
     },[]) // it is ran only on the first render of this Body component                     

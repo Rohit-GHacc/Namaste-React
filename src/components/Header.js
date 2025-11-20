@@ -4,6 +4,7 @@ import useOnlineStatus from '../utils/useOnlineStatus'
 import { useContext } from "react";
 import UserContext from "../utils/UserContext";
 import {useSelector} from 'react-redux'
+import React from 'react'
 const Header = ()=>{
     const isOnline = useOnlineStatus();
     const {loggedInUser} = useContext(UserContext);
@@ -18,6 +19,7 @@ const Header = ()=>{
             <Link className = 'hover:text-pink-500' to="/about"><li>About Us</li></Link>
             <Link className = 'hover:text-pink-500' to="/contact"><li>Contact Us</li></Link>
             <Link className = 'hover:text-pink-500' to="/cart"><li>Cart ({cartItems.length} items)</li></Link>
+            <button className = 'bg-green-400 px-4 py-2 rounded-lg hover:bg-green-600 text-white text-xl cursor-pointer'>Login</button>
             <li>{loggedInUser}</li>
         </ul>
     </div>
