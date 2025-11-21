@@ -3,6 +3,7 @@ import RestaurantCard, {withOpenLabel} from "./RestaurantCard";
 import {SWIGGY_API} from '../utils/constant'
 import Shimmer from './Shimmer'
 import UserContext from '../utils/UserContext';
+import React from 'react';
 const Body = () => {
     const [filteredList, setFilteredList] = useState([]);
     const [searchRest, setSearchRest] = useState("");
@@ -45,6 +46,7 @@ const Body = () => {
             <div className="flex justify-between space-x-4 m-4">
                 <div className = 'flex space-x-2 '>
                     <input 
+                    data-testid = "search-input"
                     className = 'border border-gray-400 p-2 rounded-2xl'
                     type = 'text' 
                     value = {searchRest} 
@@ -76,7 +78,7 @@ const Body = () => {
             <div className='flex flex-wrap m-2 justify-between space-y-2'>
                 {
                     filteredList.length === 0 ? <div className ='font-bold text-center text-2xl'>No restaurants to display</div> : filteredList.map((restaurant) => (
-                        <div className = 'hover:bg-gray-200 cursor-pointer rounded-lg' key = {restaurant?.info?.id} >{restaurant?.info?.isOpen ? <RestaurantCardOpenComp resData = {restaurant?.info}/>: <RestaurantCard resData={restaurant?.info} />}</div>
+                        <div data-testid ='res-card' className = 'hover:bg-gray-200 cursor-pointer rounded-lg' key = {restaurant?.info?.id} >{restaurant?.info?.isOpen ? <RestaurantCardOpenComp resData = {restaurant?.info}/>: <RestaurantCard resData={restaurant?.info} />}</div>
                     ))
                 }
             </div>
